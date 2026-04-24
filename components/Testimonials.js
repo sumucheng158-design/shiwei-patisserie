@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const testimonials = [
   {
@@ -31,8 +31,59 @@ const testimonials = [
   },
 ]
 
+// G: count-up hook
+function useCountUp(target, duration = 1200, start = false) {
+  const [value, setValue] = useState(0)
+  useEffect(() => {
+    if (!start) return
+    // parse numeric part
+    const numStr = String(target).replace(/[^0-9.]/g, '')
+    const num = parseFloat(numStr)
+    if (isNaN(num)) { setValue(target); return }
+    const suffix = String(target).replace(/[0-9.]/g, '')
+    const startTime = performance.now()
+    const tick = (now) => {
+      const elapsed = now - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3) // ease-out cubic
+      const current = eased * num
+      // format: if target has decimal, show 1dp; else integer
+      const formatted = numStr.includes('.') ? current.toFixed(1) : Math.floor(current).toLocaleString()
+      setValue(formatted + suffix)
+      if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [start, target, duration])
+  return value
+}
+
+function StatItem({ num, label, labelEn, delay, animate }) {
+  const displayed = useCountUp(num, 1400, animate)
+  return (
+    <div className="text-center py-10 px-4">
+      <p
+        className="text-4xl md:text-5xl text-[#4A3A2A] mb-2"
+        style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
+      >
+        {animate ? displayed || '0' : num}
+      </p>
+      <p
+        className="tracking-widest text-[#C8A97E] mb-1"
+        style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.82rem' }}
+      >
+        {labelEn}
+      </p>
+      <p className="text-[#7A5C3A]" style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 300, fontSize: '0.9rem' }}>
+        {label}
+      </p>
+    </div>
+  )
+}
+
 export default function Testimonials() {
   const sectionRef = useRef(null)
+  const statsRef = useRef(null)
+  const [statsVisible, setStatsVisible] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,7 +91,20 @@ export default function Testimonials() {
       { threshold: 0.1 }
     )
     sectionRef.current?.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+
+    // G: separate observer for stats count-up trigger
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setStatsVisible(true)
+          statsObserver.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    if (statsRef.current) statsObserver.observe(statsRef.current)
+
+    return () => { observer.disconnect(); statsObserver.disconnect() }
   }, [])
 
   return (
@@ -54,8 +118,8 @@ export default function Testimonials() {
         {/* Header */}
         <div className="text-center mb-20 reveal">
           <p
-            className="text-xs tracking-widest3 text-[#C8A97E] uppercase mb-4"
-            style={{ fontFamily: 'Cormorant Garamond, serif' }}
+            className="tracking-widest3 text-[#C8A97E] uppercase mb-4"
+            style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}
           >
             Customer Stories
           </p>
@@ -82,11 +146,10 @@ export default function Testimonials() {
               {/* Stars */}
               <div className="flex gap-1 mb-5">
                 {Array.from({ length: t.rating }).map((_, j) => (
-                  <span key={j} className="star text-sm select-none">★</span>
+                  <span key={j} className="star text-base select-none">★</span>
                 ))}
               </div>
 
-              {/* Quote */}
               <div
                 className="text-5xl text-[#E8DED4] leading-none mb-3 select-none"
                 style={{ fontFamily: 'Cormorant Garamond, serif' }}
@@ -94,7 +157,8 @@ export default function Testimonials() {
                 "
               </div>
 
-              <p className="text-sm text-[#7A5C3A] leading-loose mb-7" style={{ fontWeight: 300 }}>
+              {/* A: testimonial body text enlarged */}
+              <p className="text-[#7A5C3A] leading-loose mb-7" style={{ fontWeight: 300, fontSize: '0.95rem' }}>
                 {t.text}
               </p>
 
@@ -102,16 +166,16 @@ export default function Testimonials() {
               <div className="flex items-center justify-between border-t border-[#E8DED4] pt-5">
                 <div>
                   <p
-                    className="text-sm text-[#4A3A2A] mb-1"
-                    style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500 }}
+                    className="text-[#4A3A2A] mb-1"
+                    style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500, fontSize: '0.95rem' }}
                   >
                     {t.name}
                   </p>
-                  <p className="text-xs text-[#C8A97E]" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                  <p className="text-[#C8A97E]" style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}>
                     {t.role}
                   </p>
                 </div>
-                <span className="text-xs text-[#E8DED4]" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                <span className="text-[#E8DED4]" style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}>
                   {t.date}
                 </span>
               </div>
@@ -119,31 +183,15 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Summary stats */}
-        <div className="reveal mt-16 grid grid-cols-3 divide-x divide-[#E8DED4]" style={{ transitionDelay: '0.5s' }}>
-          {[
-            { num: '2,000+', label: '滿意顧客', labelEn: 'Happy Customers' },
-            { num: '4.9', label: '平均評分', labelEn: 'Average Rating' },
-            { num: '98%', label: '回購率', labelEn: 'Repurchase Rate' },
-          ].map((s) => (
-            <div key={s.label} className="text-center py-10 px-4">
-              <p
-                className="text-4xl md:text-5xl text-[#4A3A2A] mb-2"
-                style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}
-              >
-                {s.num}
-              </p>
-              <p
-                className="text-xs tracking-widest text-[#C8A97E] mb-1"
-                style={{ fontFamily: 'Cormorant Garamond, serif' }}
-              >
-                {s.labelEn}
-              </p>
-              <p className="text-sm text-[#7A5C3A]" style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 300 }}>
-                {s.label}
-              </p>
-            </div>
-          ))}
+        {/* G: Summary stats with count-up animation */}
+        <div
+          ref={statsRef}
+          className="reveal mt-16 grid grid-cols-3 divide-x divide-[#E8DED4]"
+          style={{ transitionDelay: '0.5s' }}
+        >
+          <StatItem num="2,000+" label="滿意顧客" labelEn="Happy Customers" animate={statsVisible} />
+          <StatItem num="4.9" label="平均評分" labelEn="Average Rating" animate={statsVisible} />
+          <StatItem num="98%" label="回購率" labelEn="Repurchase Rate" animate={statsVisible} />
         </div>
       </div>
     </section>

@@ -12,25 +12,25 @@ export default function Footer() {
             </div>
             <div>
               <p
-                className="text-sm tracking-widest text-white"
-                style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500 }}
+                className="tracking-widest text-white"
+                style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500, fontSize: '1rem' }}
               >
                 拾味製菓
               </p>
-              <p className="text-xs text-[#C8A97E]" style={{ fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.15em' }}>
+              <p className="text-[#C8A97E]" style={{ fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.15em', fontSize: '0.85rem' }}>
                 Shi Wei Pâtisserie
               </p>
             </div>
           </div>
 
-          {/* Nav */}
+          {/* Nav — E: footer links enlarged */}
           <nav className="flex flex-wrap gap-6 justify-center">
             {['商品', '品牌故事', '禮盒訂製', '聯絡我們'].map((item) => (
               <a
                 key={item}
                 href={`#${item === '商品' ? 'products' : item === '品牌故事' ? 'story' : item === '禮盒訂製' ? 'gifting' : 'contact'}`}
-                className="text-xs tracking-widest text-[#E8DED4]/60 hover:text-[#C8A97E] transition-colors duration-300"
-                style={{ fontFamily: 'Cormorant Garamond, serif' }}
+                className="tracking-widest text-[#E8DED4]/60 hover:text-[#C8A97E] transition-colors duration-300"
+                style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.9rem' }}
               >
                 {item}
               </a>
@@ -67,12 +67,18 @@ export default function Footer() {
         {/* Divider */}
         <div className="h-px bg-gradient-to-r from-transparent via-[#C8A97E]/30 to-transparent mb-8" />
 
-        {/* Bottom */}
+        {/* E: Bottom copyright text enlarged and more visible */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#E8DED4]/40" style={{ fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.1em' }}>
+          <p
+            className="text-[#E8DED4]/60"
+            style={{ fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.1em', fontSize: '0.85rem' }}
+          >
             © 2025 拾味製菓 Shi Wei Pâtisserie. All rights reserved.
           </p>
-          <p className="text-xs text-[#E8DED4]/40" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+          <p
+            className="text-[#E8DED4]/60"
+            style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}
+          >
             手作餅乾 · 拾起美好滋味
           </p>
         </div>

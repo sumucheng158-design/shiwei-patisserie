@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 17px;
 }
 
 body {
@@ -31,27 +32,15 @@ body {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--cream);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 3px;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 
 /* Selection */
-::selection {
-  background: var(--gold);
-  color: var(--white);
-}
+::selection { background: var(--gold); color: var(--white); }
 
 /* Animated underline */
-.hover-underline {
-  position: relative;
-}
+.hover-underline { position: relative; }
 .hover-underline::after {
   content: '';
   position: absolute;
@@ -62,18 +51,14 @@ body {
   background: var(--gold);
   transition: width 0.4s ease;
 }
-.hover-underline:hover::after {
-  width: 100%;
-}
+.hover-underline:hover::after { width: 100%; }
 
 /* Grain overlay */
 .grain::before {
   content: '';
   position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 999;
@@ -88,7 +73,11 @@ body {
   margin: 0 auto;
 }
 
-/* Section fade-in on scroll */
+/* K: letter-spacing utilities referenced in JSX classNames */
+.tracking-widest2 { letter-spacing: 0.25em; }
+.tracking-widest3 { letter-spacing: 0.4em; }
+
+/* L: reveal — opacity starts at 0 via CSS so page never flashes blank */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -100,22 +89,20 @@ body {
 }
 
 /* Product card hover */
-.product-card {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
+.product-card { transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .product-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 60px rgba(74, 58, 42, 0.12);
 }
 
-/* Btn gold */
+/* B: btn-gold — font size enlarged */
 .btn-gold {
   display: inline-block;
   padding: 14px 40px;
   background: var(--gold);
   color: #fff;
   letter-spacing: 0.2em;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   transition: background 0.3s ease, transform 0.2s ease;
@@ -123,18 +110,16 @@ body {
   border: none;
   outline: none;
 }
-.btn-gold:hover {
-  background: var(--brown-dark);
-  transform: translateY(-1px);
-}
+.btn-gold:hover { background: var(--brown-dark); transform: translateY(-1px); }
 
+/* B: btn-outline — font size enlarged */
 .btn-outline {
   display: inline-block;
   padding: 12px 36px;
   border: 1px solid var(--gold);
   color: var(--gold);
   letter-spacing: 0.2em;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -142,22 +127,13 @@ body {
   background: transparent;
   outline: none;
 }
-.btn-outline:hover {
-  background: var(--gold);
-  color: #fff;
-}
+.btn-outline:hover { background: var(--gold); color: #fff; }
 
 /* Testimonial star */
-.star {
-  color: var(--gold);
-}
+.star { color: var(--gold); }
 
 /* Hero ornament line */
-.ornament-line {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
+.ornament-line { display: flex; align-items: center; gap: 16px; }
 .ornament-line::before,
 .ornament-line::after {
   content: '';
@@ -165,6 +141,12 @@ body {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--gold));
 }
-.ornament-line::after {
-  background: linear-gradient(to left, transparent, var(--gold));
+.ornament-line::after { background: linear-gradient(to left, transparent, var(--gold)); }
+
+/* F: image placeholder */
+.product-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px;
 }

@@ -17,7 +17,7 @@ export default function Hero() {
         style={{ background: 'radial-gradient(circle, #C8A97E 0%, transparent 70%)', transform: 'translate(-30%, 10%)' }}
       />
 
-      {/* Japanese kanji decorative */}
+      {/* Decorative kanji */}
       <div
         className="absolute top-32 left-10 text-8xl opacity-5 select-none"
         style={{ fontFamily: '"Shippori Mincho", serif', color: '#4A3A2A', writingMode: 'vertical-rl' }}
@@ -34,27 +34,24 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl">
         {/* Top ornament */}
-        <div className="flex items-center gap-4 mb-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        {/* L: use CSS class instead of inline opacity:0 so it's never invisible on slow JS */}
+        <div className="flex items-center gap-4 mb-10 reveal visible" style={{ transitionDelay: '0.2s' }}>
           <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#C8A97E]" />
+          {/* A: slightly larger subtitle */}
           <span
-            className="text-xs tracking-widest3 text-[#C8A97E] uppercase"
-            style={{ fontFamily: 'Cormorant Garamond, serif' }}
+            className="tracking-widest3 text-[#C8A97E] uppercase"
+            style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}
           >
             Shi Wei Pâtisserie
           </span>
           <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#C8A97E]" />
         </div>
 
-        {/* Logo — large, prominent */}
+        {/* Logo */}
         <div
-          className="mb-10 relative"
-          style={{
-            animation: 'fadeIn 1.2s ease forwards',
-            animationDelay: '0.4s',
-            opacity: 0,
-          }}
+          className="mb-10 relative reveal visible"
+          style={{ transitionDelay: '0.4s' }}
         >
-          {/* White circle background to make logo visible on light bg */}
           <div
             className="relative w-36 h-36 md:w-48 md:h-48 rounded-full shadow-2xl flex items-center justify-center"
             style={{
@@ -74,14 +71,12 @@ export default function Hero() {
 
         {/* Brand name */}
         <h1
-          className="text-5xl md:text-7xl tracking-widest mb-4"
+          className="text-5xl md:text-7xl tracking-widest mb-4 reveal visible"
           style={{
             fontFamily: '"Shippori Mincho", serif',
             color: '#4A3A2A',
             fontWeight: 500,
-            animation: 'fadeUp 1s ease forwards',
-            animationDelay: '0.6s',
-            opacity: 0,
+            transitionDelay: '0.6s',
           }}
         >
           拾味製菓
@@ -89,49 +84,46 @@ export default function Hero() {
 
         {/* Gold divider */}
         <div
-          className="flex items-center gap-3 my-6"
-          style={{ animation: 'fadeIn 1s ease forwards', animationDelay: '0.8s', opacity: 0 }}
+          className="flex items-center gap-3 my-6 reveal visible"
+          style={{ transitionDelay: '0.8s' }}
         >
           <div className="h-px w-20 bg-gradient-to-r from-transparent to-[#C8A97E]" />
           <div className="w-1.5 h-1.5 rounded-full bg-[#C8A97E]" />
           <div className="h-px w-20 bg-gradient-to-l from-transparent to-[#C8A97E]" />
         </div>
 
-        {/* Slogan */}
+        {/* A: Slogan — larger */}
         <p
-          className="text-xl md:text-2xl font-light text-[#7A5C3A] tracking-wide mb-2"
+          className="text-2xl md:text-3xl font-light text-[#7A5C3A] tracking-wide mb-2 reveal visible"
           style={{
             fontFamily: '"Shippori Mincho", serif',
-            animation: 'fadeUp 1s ease forwards',
-            animationDelay: '1s',
-            opacity: 0,
+            transitionDelay: '1s',
           }}
         >
           拾起風味，收藏每一刻的甜
         </p>
 
-        {/* Latin subtitle */}
+        {/* A: Latin subtitle — larger */}
         <p
-          className="text-xs tracking-widest3 text-[#C8A97E] uppercase mb-12"
+          className="tracking-widest3 text-[#C8A97E] uppercase mb-12 reveal visible"
           style={{
             fontFamily: 'Cormorant Garamond, serif',
-            animation: 'fadeIn 1s ease forwards',
-            animationDelay: '1.2s',
-            opacity: 0,
+            fontSize: '0.9rem',
+            transitionDelay: '1.2s',
           }}
         >
           Handcrafted with love · 手作餅乾
         </p>
 
-        {/* CTA */}
+        {/* I: CTA buttons — full-width on mobile, larger gap */}
         <div
-          className="flex flex-col sm:flex-row gap-4 items-center"
-          style={{ animation: 'fadeUp 1s ease forwards', animationDelay: '1.4s', opacity: 0 }}
+          className="flex flex-col sm:flex-row gap-6 items-center w-full sm:w-auto reveal visible"
+          style={{ transitionDelay: '1.4s' }}
         >
-          <a href="#products" className="btn-gold text-xs px-10 py-4" style={{ letterSpacing: '0.25em' }}>
+          <a href="#products" className="btn-gold w-full sm:w-auto text-center px-10 py-4" style={{ letterSpacing: '0.25em' }}>
             立即訂購
           </a>
-          <a href="#story" className="btn-outline text-xs px-10 py-4" style={{ letterSpacing: '0.25em' }}>
+          <a href="#story" className="btn-outline w-full sm:w-auto text-center px-10 py-4" style={{ letterSpacing: '0.25em' }}>
             品牌故事
           </a>
         </div>
@@ -139,22 +131,11 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
-        <span className="text-xs tracking-widest text-[#7A5C3A]" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+        <span className="tracking-widest text-[#7A5C3A]" style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}>
           scroll
         </span>
         <div className="w-px h-12 bg-gradient-to-b from-[#C8A97E] to-transparent animate-pulse" />
       </div>
-
-      <style jsx>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-      `}</style>
     </section>
   )
 }

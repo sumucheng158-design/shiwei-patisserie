@@ -58,8 +58,8 @@ export default function Story() {
         {/* Header */}
         <div className="text-center mb-20 reveal">
           <p
-            className="text-xs tracking-widest3 uppercase mb-4"
-            style={{ fontFamily: 'Cormorant Garamond, serif', color: '#C8A97E' }}
+            className="tracking-widest3 uppercase mb-4"
+            style={{ fontFamily: 'Cormorant Garamond, serif', color: '#C8A97E', fontSize: '0.85rem' }}
           >
             Our Story
           </p>
@@ -75,13 +75,13 @@ export default function Story() {
         {/* Story text */}
         <div className="grid md:grid-cols-2 gap-16 items-center mb-20">
           <div className="reveal">
-            {/* Decorative quote mark */}
             <div
               className="text-8xl text-[#C8A97E] leading-none mb-4 opacity-40 select-none"
               style={{ fontFamily: 'Cormorant Garamond, serif' }}
             >
               "
             </div>
+            {/* A: quote enlarged */}
             <p
               className="text-2xl md:text-3xl text-white leading-relaxed mb-6"
               style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 400 }}
@@ -90,18 +90,19 @@ export default function Story() {
               <br />
               味，是記憶裡最溫柔的語言。
             </p>
-            <p className="text-[#E8DED4] text-sm leading-loose" style={{ fontWeight: 300 }}>
+            {/* A: body text enlarged */}
+            <p className="text-[#E8DED4] leading-loose" style={{ fontWeight: 300, fontSize: '0.95rem' }}>
               拾味製菓誕生於一個簡單的念頭：想讓每個人在繁忙的生活中，
               因為一片小小的餅乾，感受到被珍視的溫暖。
             </p>
           </div>
 
           <div className="reveal" style={{ transitionDelay: '0.2s' }}>
-            <p className="text-[#E8DED4] text-sm leading-loose mb-6" style={{ fontWeight: 300 }}>
+            <p className="text-[#E8DED4] leading-loose mb-6" style={{ fontWeight: 300, fontSize: '0.95rem' }}>
               創辦人旅居日本期間，深受和菓子文化中「一期一會」精神的感動——
               每一次的相聚，都值得用最誠摯的手藝來記錄。
             </p>
-            <p className="text-[#E8DED4] text-sm leading-loose mb-8" style={{ fontWeight: 300 }}>
+            <p className="text-[#E8DED4] leading-loose mb-8" style={{ fontWeight: 300, fontSize: '0.95rem' }}>
               回台後，帶著對食材的尊重與對美學的堅持，
               用雙手將這份精神轉化為一片片餅乾，
               希望每一口都能讓您拾起生活中那些美好的滋味。
@@ -109,8 +110,8 @@ export default function Story() {
             <div className="flex items-center gap-4">
               <div className="h-px flex-1 bg-[#C8A97E] opacity-30" />
               <span
-                className="text-xs tracking-widest text-[#C8A97E]"
-                style={{ fontFamily: 'Cormorant Garamond, serif' }}
+                className="tracking-widest text-[#C8A97E]"
+                style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}
               >
                 手作餅乾 · 拾起美好滋味
               </span>
@@ -131,18 +132,19 @@ export default function Story() {
                 {v.icon}
               </div>
               <p
-                className="text-xs tracking-widest text-[#C8A97E] mb-2"
-                style={{ fontFamily: 'Cormorant Garamond, serif' }}
+                className="tracking-widest text-[#C8A97E] mb-2"
+                style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}
               >
                 {v.titleEn}
               </p>
               <h3
-                className="text-lg text-white mb-4"
-                style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500 }}
+                className="text-white mb-4"
+                style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500, fontSize: '1.1rem' }}
               >
                 {v.title}
               </h3>
-              <p className="text-[#E8DED4] text-xs leading-relaxed" style={{ fontWeight: 300 }}>
+              {/* A: value description enlarged */}
+              <p className="text-[#E8DED4] leading-relaxed" style={{ fontWeight: 300, fontSize: '0.875rem' }}>
                 {v.desc}
               </p>
             </div>

@@ -30,22 +30,28 @@ export default function Navbar() {
           <div className="w-10 h-10 relative bg-[#4A3A2A] rounded-full flex items-center justify-center overflow-hidden">
             <Image src="/logo.png" alt="拾味製菓" fill style={{ objectFit: 'cover' }} />
           </div>
+          {/* C: brand name in navbar enlarged */}
           <span
-            className="text-sm tracking-widest2 text-[#4A3A2A]"
-            style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500 }}
+            className="tracking-widest2 text-[#4A3A2A]"
+            style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500, fontSize: '1rem' }}
           >
             拾味製菓
           </span>
         </a>
 
-        {/* Desktop Nav */}
+        {/* C: Desktop Nav — links enlarged */}
         <ul className="hidden md:flex gap-10">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="text-xs tracking-widest text-[#4A3A2A] hover-underline opacity-80 hover:opacity-100 transition-opacity"
-                style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem', letterSpacing: '0.15em' }}
+                className="hover-underline opacity-80 hover:opacity-100 transition-opacity"
+                style={{
+                  fontFamily: 'Cormorant Garamond, serif',
+                  fontSize: '1rem',
+                  letterSpacing: '0.15em',
+                  color: '#4A3A2A',
+                }}
               >
                 {l.label}
               </a>
@@ -56,7 +62,7 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href="#contact"
-          className="hidden md:block btn-gold text-xs py-3 px-6"
+          className="hidden md:block btn-gold py-3 px-6"
           style={{ letterSpacing: '0.18em' }}
         >
           立即訂購
@@ -68,37 +74,34 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >
-          <span
-            className={`block w-6 h-px bg-[#4A3A2A] transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}
-          />
+          <span className={`block w-6 h-px bg-[#4A3A2A] transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
           <span className={`block w-6 h-px bg-[#4A3A2A] transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-          <span
-            className={`block w-6 h-px bg-[#4A3A2A] transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}
-          />
+          <span className={`block w-6 h-px bg-[#4A3A2A] transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
       </div>
 
       {/* Mobile menu */}
       <div
         className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md transition-all duration-400 overflow-hidden ${
-          menuOpen ? 'max-h-64 py-6' : 'max-h-0'
+          menuOpen ? 'max-h-72 py-6' : 'max-h-0'
         }`}
       >
         <ul className="flex flex-col items-center gap-6">
           {links.map((l) => (
             <li key={l.href}>
+              {/* I: mobile menu text also enlarged */}
               <a
                 href={l.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-sm tracking-widest text-[#4A3A2A]"
-                style={{ fontFamily: 'Cormorant Garamond, serif' }}
+                className="text-[#4A3A2A]"
+                style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '1.05rem', letterSpacing: '0.15em' }}
               >
                 {l.label}
               </a>
             </li>
           ))}
           <li>
-            <a href="#contact" onClick={() => setMenuOpen(false)} className="btn-gold py-3 px-8 text-xs">
+            <a href="#contact" onClick={() => setMenuOpen(false)} className="btn-gold py-3 px-8">
               立即訂購
             </a>
           </li>

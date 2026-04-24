@@ -57,6 +57,29 @@ const products = [
   },
 ]
 
+// F: SVG placeholder component replacing emoji
+function ImagePlaceholder({ emoji, label }) {
+  return (
+    <div
+      className="w-full h-full flex flex-col items-center justify-center gap-3"
+      style={{ background: 'linear-gradient(135deg, #F5EFEA 0%, #E8DED4 100%)' }}
+    >
+      <span className="text-6xl select-none">{emoji}</span>
+      <span
+        style={{
+          fontFamily: 'Cormorant Garamond, serif',
+          fontSize: '0.7rem',
+          letterSpacing: '0.22em',
+          color: '#C8A97E',
+          opacity: 0.8,
+        }}
+      >
+        {label}
+      </span>
+    </div>
+  )
+}
+
 export default function Products() {
   const sectionRef = useRef(null)
 
@@ -81,9 +104,10 @@ export default function Products() {
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="text-center mb-20 reveal">
+          {/* A: section labels enlarged */}
           <p
-            className="text-xs tracking-widest3 text-[#C8A97E] uppercase mb-4"
-            style={{ fontFamily: 'Cormorant Garamond, serif' }}
+            className="tracking-widest3 text-[#C8A97E] uppercase mb-4"
+            style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}
           >
             Our Collection
           </p>
@@ -94,7 +118,8 @@ export default function Products() {
             精選餅乾
           </h2>
           <div className="gold-divider mb-6" />
-          <p className="text-[#7A5C3A] text-sm leading-relaxed max-w-md mx-auto" style={{ fontWeight: 300 }}>
+          {/* A: description text enlarged */}
+          <p className="text-[#7A5C3A] leading-relaxed max-w-md mx-auto" style={{ fontWeight: 300, fontSize: '0.95rem' }}>
             每一片餅乾，都是時間與用心的結晶。
             <br />
             嚴選食材，手工製作，拒絕妥協。
@@ -112,56 +137,57 @@ export default function Products() {
                 boxShadow: '0 4px 30px rgba(74, 58, 42, 0.06)',
               }}
             >
-              {/* Image area */}
-              <div
-                className="relative h-52 flex items-center justify-center overflow-hidden"
-                style={{ background: 'linear-gradient(135deg, #F5EFEA 0%, #E8DED4 100%)' }}
-              >
-                {/* Tag */}
+              {/* F: image area with placeholder */}
+              <div className="relative h-52 overflow-hidden">
                 {p.tag && (
                   <div
-                    className="absolute top-4 left-4 px-3 py-1 text-xs tracking-widest text-white"
-                    style={{ background: '#C8A97E', fontFamily: 'Cormorant Garamond, serif' }}
+                    className="absolute top-4 left-4 px-3 py-1 z-10"
+                    style={{
+                      background: '#C8A97E',
+                      fontFamily: 'Cormorant Garamond, serif',
+                      fontSize: '0.8rem',
+                      letterSpacing: '0.1em',
+                      color: 'white',
+                    }}
                   >
                     {p.tag}
                   </div>
                 )}
-                {/* Emoji placeholder (replace with real images) */}
-                <span className="text-7xl transition-transform duration-500 group-hover:scale-110 select-none">
-                  {p.emoji}
-                </span>
-                {/* Hover overlay */}
+                {/* F: placeholder with emoji + "即將上架" label */}
+                <ImagePlaceholder emoji={p.emoji} label="即將上架 · Coming Soon" />
+                {/* hover overlay */}
                 <div className="absolute inset-0 bg-[#4A3A2A]/0 group-hover:bg-[#4A3A2A]/5 transition-all duration-400" />
               </div>
 
-              {/* Content */}
+              {/* D: card content — all text enlarged */}
               <div className="p-7">
                 <p
-                  className="text-xs tracking-widest text-[#C8A97E] mb-2"
-                  style={{ fontFamily: 'Cormorant Garamond, serif' }}
+                  className="tracking-widest text-[#C8A97E] mb-2"
+                  style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}
                 >
                   {p.nameEn}
                 </p>
                 <h3
                   className="text-xl text-[#4A3A2A] mb-3"
-                  style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500 }}
+                  style={{ fontFamily: '"Shippori Mincho", serif', fontWeight: 500, fontSize: '1.15rem' }}
                 >
                   {p.name}
                 </h3>
-                <p className="text-xs text-[#7A5C3A] leading-relaxed mb-6" style={{ fontWeight: 300 }}>
+                {/* D: description enlarged from text-xs to 0.875rem */}
+                <p className="text-[#7A5C3A] leading-relaxed mb-6" style={{ fontWeight: 300, fontSize: '0.875rem' }}>
                   {p.desc}
                 </p>
                 <div className="flex items-center justify-between">
                   <span
-                    className="text-lg text-[#4A3A2A]"
-                    style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 500 }}
+                    className="text-[#4A3A2A]"
+                    style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 500, fontSize: '1.1rem' }}
                   >
                     {p.price}
                   </span>
                   <a
                     href="#contact"
-                    className="btn-outline py-2 px-5 text-xs"
-                    style={{ letterSpacing: '0.15em' }}
+                    className="btn-outline py-2 px-5"
+                    style={{ letterSpacing: '0.15em', fontSize: '0.875rem' }}
                   >
                     訂購
                   </a>
@@ -172,7 +198,10 @@ export default function Products() {
         </div>
 
         {/* Note */}
-        <p className="text-center text-xs text-[#C8A97E] mt-14 tracking-widest reveal" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+        <p
+          className="text-center text-[#C8A97E] mt-14 tracking-widest reveal"
+          style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '0.85rem' }}
+        >
           * 所有商品均為手工現製，依季節與食材供應調整品項
         </p>
       </div>
