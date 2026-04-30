@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 
 const products = [
   {
     id: 1,
-    emoji: '🌸',
+    image: '/Sakura Matcha Sablé.png',
     name: '櫻花抹茶酥',
     nameEn: 'Sakura Matcha Sablé',
     desc: '嚴選京都宇治抹茶，融合台灣玉荷包桂花，口感酥脆細緻，餘韻悠長。',
@@ -12,7 +13,7 @@ const products = [
   },
   {
     id: 2,
-    emoji: '🍋',
+    image: '/Sea Salt Lemon Tuile.jpg',
     name: '海鹽檸檬薄酥',
     nameEn: 'Sea Salt Lemon Tuile',
     desc: '清新台灣檸檬搭配法國布列塔尼海鹽，薄脆之中帶著清爽果香。',
@@ -21,7 +22,7 @@ const products = [
   },
   {
     id: 3,
-    emoji: '🌰',
+    image: '/Caramel Hazelnut Cookie.webp',
     name: '焦糖榛果奶酥',
     nameEn: 'Caramel Hazelnut Cookie',
     desc: '法國榛果醬與頂級發酵奶油完美結合，焦糖香氣瀰漫，入口即化。',
@@ -30,7 +31,7 @@ const products = [
   },
   {
     id: 4,
-    emoji: '🍫',
+    image: '/Dark Chocolate Rice Crisp.webp',
     name: '黑巧克力米脆餅',
     nameEn: 'Dark Chocolate Rice Crisp',
     desc: '70% 厄瓜多黑巧克力搭配日本品川米，層次豐富，苦甜平衡。',
@@ -39,7 +40,7 @@ const products = [
   },
   {
     id: 5,
-    emoji: '🌿',
+    image: '/Earl Grey Almond Tile.png',
     name: '伯爵茶杏仁瓦片',
     nameEn: 'Earl Grey Almond Tile',
     desc: '法國伯爵茶搭配法式杏仁片，入口有清雅花香與堅果的美妙層次。',
@@ -48,7 +49,7 @@ const products = [
   },
   {
     id: 6,
-    emoji: '🌼',
+    image: '/Rose Lychee Snowball.png',
     name: '玫瑰荔枝雪球',
     nameEn: 'Rose Lychee Snowball',
     desc: '純白糖粉包裹玫瑰荔枝餡心，外酥內軟，如小雪球般迷人可愛。',
@@ -56,29 +57,6 @@ const products = [
     tag: '情人節限定',
   },
 ]
-
-// F: SVG placeholder component replacing emoji
-function ImagePlaceholder({ emoji, label }) {
-  return (
-    <div
-      className="w-full h-full flex flex-col items-center justify-center gap-3"
-      style={{ background: 'linear-gradient(135deg, #F5EFEA 0%, #E8DED4 100%)' }}
-    >
-      <span className="text-6xl select-none">{emoji}</span>
-      <span
-        style={{
-          fontFamily: 'Cormorant Garamond, serif',
-          fontSize: '0.7rem',
-          letterSpacing: '0.22em',
-          color: '#C8A97E',
-          opacity: 0.8,
-        }}
-      >
-        {label}
-      </span>
-    </div>
-  )
-}
 
 export default function Products() {
   const sectionRef = useRef(null)
@@ -137,7 +115,7 @@ export default function Products() {
                 boxShadow: '0 4px 30px rgba(74, 58, 42, 0.06)',
               }}
             >
-              {/* F: image area with placeholder */}
+              {/* Image area */}
               <div className="relative h-52 overflow-hidden">
                 {p.tag && (
                   <div
@@ -153,8 +131,13 @@ export default function Products() {
                     {p.tag}
                   </div>
                 )}
-                {/* F: placeholder with emoji + "即將上架" label */}
-                <ImagePlaceholder emoji={p.emoji} label="即將上架 · Coming Soon" />
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
                 {/* hover overlay */}
                 <div className="absolute inset-0 bg-[#4A3A2A]/0 group-hover:bg-[#4A3A2A]/5 transition-all duration-400" />
               </div>
